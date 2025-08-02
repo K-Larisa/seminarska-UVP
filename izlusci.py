@@ -44,7 +44,7 @@ def izlusci_id_knjige(od, do):
                         title = znacka_title.get_text(strip=True) if znacka_title else "" #odstrani vodilne in zaključne presledke (strip=True).
                         
                         knjige_glavno.append((id_knjige, title))
-                        print(f"stran {stran}  ID: {id_knjige}, Naslov: {title}")
+                        #print(f"stran {stran}  ID: {id_knjige}, Naslov: {title}")
     return(knjige_glavno)
 
 
@@ -62,6 +62,7 @@ def izlusci_ostale_podatke(knjige_glavno):
         st_prenosov = ""
         datum_objave = ""
         zanri = []
+        id_zanra = ""
         ilustrator = ""
         prevajalec = ""
         
@@ -90,7 +91,22 @@ def izlusci_ostale_podatke(knjige_glavno):
                     st_prenosov = vsebina_celice
 
                 elif geslo == "Subject":
-                    zanri.append(vsebina_celice)
+                    # zanri.append(vsebina_celice)
+                    povezava = td.find("a")
+                    ## spodnje ni bilo najboljše, ker so bili zapisi v obliki British -- Italy -- Fiction
+                    if povezava: 
+                       id_zanra = povezava["href"].split("/")[-1]
+                       zanri.append((id_zanra, vsebina_celice)) 
+                    # if povezava:
+                    #     id_zanra = povezava["href"].split("/")[-1]
+                    #     zapis_zanra = povezava.text.strip()
+                        
+                    #     seznam_zanrov = zapis_zanra.split("--")
+                    #     for zanr in seznam_zanrov:
+                    #         en_zanr = zanr.strip()
+                    #         zanri.append((id_zanra, en_zanr))
+
+
                 
                 elif geslo == "Author":
                     avtor = vsebina_celice
