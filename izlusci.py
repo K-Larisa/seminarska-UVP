@@ -50,24 +50,84 @@ def izlusci_id_knjige(od, do):
 
 
 def izlusci_ostale_podatke(knjige_glavno):
+    podatki_o_knjigi = []
     for knjiga in knjige_glavno:
         id = knjiga[0]
-
+        
         avtor = ""
+        id_osebe = ""
+        osebe = []
+        naslov = ""
         jezik = ""
         st_prenosov = ""
         datum_objave = ""
-        zanr = ""
-
+        zanri = []
+        ilustrator = ""
+        prevajalec = ""
+        
 
         with open(os.path.join("knjige", f"knjige{id}.html"), "r", encoding="utf-8") as dat:
             podatki = dat.read()
             soup = BeautifulSoup(podatki, "html.parser")
 
-        avtor = knjiga.find("span", class_="subtitle")
-        avtor = avtor.get_text(strip=True) if avtor else ""
+            tabela = soup.find_all("tr")
+            for vrstica in tabela:
+                th = vrstica.find("th")
+                td = vrstica.find("td")
+                if not th or not td:
+                    continue
 
+                geslo = th.text.strip()
+                vsebina_celice = td.text.strip()
 
+                if geslo == "Title":
+                    naslov = vsebina_celice
+                elif geslo == "Language":
+                    jezik = vsebina_celice
+                elif geslo == "Release Date":
+                    datum_objave = vsebina_celice
+                elif geslo == "Downloads":
+                    st_prenosov = vsebina_celice
+
+                elif geslo == "Subject":
+                    zanri.append(vsebina_celice)
+                
+                elif geslo == "Author":
+                    avtor = vsebina_celice
+                    povezava = td.find("a")
+                    if povezava:
+                        id_osebe = povezava["href"].split("/")[-1] #razdeli glede / in vzame zadnjega iz seznama(sifro)
+                                            #[href] dobi ven vrednost kar je v href
+                                            #primer <a href="/ebooks/author/7" ...
+                        osebe.append((id_osebe, avtor, "A"))
+
+                elif geslo == "Illustrator":
+                    ilustrator = vsebina_celice
+                    povezava = td.find("a")
+                    if povezava:
+                        id_osebe = povezava["href"].split("/")[-1]
+                        osebe.append((id_osebe, ilustrator, "I"))
+
+                
+                elif geslo == "Translator":
+                    prevajalec = vsebina_celice
+                    povezava = td.find("a")
+                    if povezava:
+                        id_osebe = povezava["href"].split("/")[-1]
+                        osebe.append((id_osebe, prevajalec, "P"))
+        
+            podatki_o_knjigi.append(
+                {
+                    "id": id,
+                    "naslov": naslov,
+                    "osebe": osebe,
+                    "jezik": jezik,
+                    "zanri": zanri,
+                    "datum objave": datum_objave,
+                    "stevilo prenosov": st_prenosov,
+                }
+                )
+    return podatki_o_knjigi
 
 
 
