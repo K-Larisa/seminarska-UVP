@@ -35,3 +35,4 @@ def shrani_html_o_posamezni_knjigi(knjige_glavno): #pobira ven iz seznama [(id, 
         with open(os.path.join("knjige", f"knjige{id}.html"), "w", encoding="utf-8") as dat:
             dat.write(odgovor.text)
         time.sleep(1)
+
