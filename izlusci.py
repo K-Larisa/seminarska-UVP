@@ -157,8 +157,7 @@ def izlusci_ostale_podatke(knjige_glavno):
                 }
                 )
     return podatki_o_knjigi
-
-
+ 
 
 #.text.strip() in .get_text(strip=True) za enostavne <span> deluje enako, za gnezdene elemente <span><b>Ime</b> <i>Avtor</i></span>
 #pa je bolje .get..., saj zdruzi vse podelemente, pocisti presledke
