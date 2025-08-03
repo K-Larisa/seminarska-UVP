@@ -11,6 +11,7 @@ def shrani_knjige(knjige):
                 "jezik",
                 "datum objave",
                 "stevilo prenosov",
+                "tezavnost",
             ]
         )
     
@@ -23,6 +24,7 @@ def shrani_knjige(knjige):
                     knjiga["jezik"],
                     knjiga["datum objave"],
                     knjiga["stevilo prenosov"],
+                    knjiga["tezavnost"],
                 ]
             )
 

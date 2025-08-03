@@ -65,6 +65,7 @@ def izlusci_ostale_podatke(knjige_glavno):
         id_zanra = ""
         ilustrator = ""
         prevajalec = ""
+        tezavnost = ""
         
 
         with open(os.path.join("knjige", f"knjige{id}.html"), "r", encoding="utf-8") as dat:
@@ -85,10 +86,21 @@ def izlusci_ostale_podatke(knjige_glavno):
                     naslov = vsebina_celice
                 elif geslo == "Language":
                     jezik = vsebina_celice
+                elif geslo == "Reading Level":
+                    ujemanje = re.search(r'(\d+(\.\d+)?)', vsebina_celice)
+                    tezavnost = ujemanje.group(1) if ujemanje else ""
+
                 elif geslo == "Release Date":
-                    datum_objave = vsebina_celice
+                    leto = re.search(r'\b\d{4}\b', vsebina_celice)
+                    datum_objave = leto.group(0) if leto else ""
+
                 elif geslo == "Downloads":
-                    st_prenosov = vsebina_celice
+                    stevilo = re.search(r'\d+', vsebina_celice)
+                    st_prenosov = int(stevilo.group(0)) if stevilo else 0
+                # elif geslo == "Release Date":
+                #     datum_objave = vsebina_celice
+                # elif geslo == "Downloads":
+                #     st_prenosov = vsebina_celice
 
                 elif geslo == "Subject":
                     # zanri.append(vsebina_celice)
@@ -141,6 +153,7 @@ def izlusci_ostale_podatke(knjige_glavno):
                     "zanri": zanri,
                     "datum objave": datum_objave,
                     "stevilo prenosov": st_prenosov,
+                    "tezavnost": tezavnost
                 }
                 )
     return podatki_o_knjigi
