@@ -19,7 +19,6 @@ import re
 #vse skupah shranimo v seznam oblike [(id, naslov), (id, naslov), ...]
 
 def izlusci_id_knjige(od, do):
-    #print("Trenutna delovna mapa:", os.getcwd())
 
     knjige_glavno = []
     for stran in range(od, do):
@@ -91,7 +90,7 @@ def izlusci_ostale_podatke(knjige_glavno):
                     tezavnost = ujemanje.group(1) if ujemanje else ""
 
                 elif geslo == "Release Date":
-                    leto = re.search(r'\b\d{4}\b', vsebina_celice)
+                    leto = re.search(r'\b\d{4}\b', vsebina_celice)  #datum prej se z mesecem in dnevom
                     datum_objave = leto.group(0) if leto else ""
 
                 elif geslo == "Downloads":
@@ -124,9 +123,10 @@ def izlusci_ostale_podatke(knjige_glavno):
                     avtor = vsebina_celice
                     povezava = td.find("a")
                     if povezava:
-                        id_osebe = povezava["href"].split("/")[-1] #razdeli glede / in vzame zadnjega iz seznama(sifro)
+                        id_osebe = povezava["href"].split("/")[-1] 
                                             #[href] dobi ven vrednost kar je v href
                                             #primer <a href="/ebooks/author/7" ...
+                                            #razdeli glede / in vzame zadnjega iz seznama(sifro)
                         osebe.append((id_osebe, avtor, "A"))
 
                 elif geslo == "Illustrator":

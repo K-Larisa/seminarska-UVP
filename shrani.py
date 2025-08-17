@@ -16,7 +16,7 @@ def shrani_knjige(knjige):
         )
     
         for knjiga in knjige:
-            x = knjiga["id"]
+            
             pisatelj.writerow(
                 [
                     knjiga["id"],
