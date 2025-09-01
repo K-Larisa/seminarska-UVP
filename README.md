@@ -11,4 +11,6 @@ Datoteka **analiza_podatkov.ipnyb* vsebuje tabele in grafe, ter analizo pridoblj
 
 
 
+
+
 Pripravila Larisa Klement, avgust 2025
