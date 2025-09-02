@@ -18,13 +18,13 @@ def shrani_podatke_o_knjigah(od, do):
             continue
           
 
-        with open(os.path.join("knjige", f"knjige{stran}.html"), "w", encoding="utf-8") as dat:  #nujno utf-8, ce ne ne zna zapisati datoteke, moti ga nek znak
+        with open(os.path.join("knjige", f"knjige{stran}.html"), "w", encoding="utf-8") as dat:
             dat.write(odgovor.text)
         time.sleep(1)  #da ne obremeni streznika
     print("konec shrani_podatke_o_knjigah")
 
 
-def shrani_html_o_posamezni_knjigi(knjige_glavno): #pobira ven iz seznama [(id, naslov), (id, naslov)...]
+def shrani_html_o_posamezni_knjigi(knjige_glavno):
     for knjiga in knjige_glavno:
         id = knjiga[0]
         odgovor = requests.get(f"https://www.gutenberg.org/ebooks/{id}", headers=headers)

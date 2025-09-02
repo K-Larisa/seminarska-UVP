@@ -3,7 +3,7 @@ import csv
 def shrani_knjige(knjige):
     with open("knjige.csv", "w", newline='', encoding='utf-8') as dat:
 
-        pisatelj = csv.writer(dat, delimiter=";") #v excelu ti odpre z ;
+        pisatelj = csv.writer(dat, delimiter=";") #v excelu ti odpre z ";"
         pisatelj.writerow(
             [
                 "id knjige",
@@ -14,7 +14,7 @@ def shrani_knjige(knjige):
                 "tezavnost",
             ]
         )
-    
+
         for knjiga in knjige:
             
             pisatelj.writerow(
