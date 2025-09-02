@@ -3,7 +3,7 @@ import csv
 def shrani_knjige(knjige):
     with open("knjige.csv", "w", newline='', encoding='utf-8') as dat:
 
-        pisatelj = csv.writer(dat, delimiter=";") #v excelu ti odpre z ";"
+        pisatelj = csv.writer(dat, quoting=csv.QUOTE_ALL)
         pisatelj.writerow(
             [
                 "id knjige",
@@ -31,7 +31,7 @@ def shrani_knjige(knjige):
 
 def shrani_osebe(knjige):
     with open("osebe.csv", "w", newline='', encoding='utf-8') as dat:
-        pisatelj = csv.writer(dat, delimiter=";")
+        pisatelj = csv.writer(dat, quoting=csv.QUOTE_ALL)
         pisatelj.writerow(
             [
                 "id osebe",
@@ -54,7 +54,7 @@ def shrani_osebe(knjige):
 
 def shrani_zanre(knjige):
     with open("zanri.csv", "w", newline='', encoding='utf-8') as dat:
-        pisatelj = csv.writer(dat, delimiter=";")
+        pisatelj = csv.writer(dat, quoting=csv.QUOTE_ALL)
         pisatelj.writerow(
             [
                 "id zanra",
@@ -77,7 +77,7 @@ def shrani_zanre(knjige):
 
 def povezava_osebe_knjige(knjige):
     with open("osebe_knjige.csv", "w", newline='', encoding='utf-8') as dat:
-        pisatelj = csv.writer(dat, delimiter=";")
+        pisatelj = csv.writer(dat, quoting=csv.QUOTE_ALL)
         pisatelj.writerow(
             [
                 "id knjige",
@@ -95,7 +95,7 @@ def povezava_osebe_knjige(knjige):
 
 def povezava_zanri_knjige(knjige):
     with open("zanri_knjige.csv", "w", newline='', encoding='utf-8') as dat:
-        pisatelj = csv.writer(dat, delimiter=";")
+        pisatelj = csv.writer(dat, quoting=csv.QUOTE_ALL)
         pisatelj.writerow(
             [
                 "id knjige",
